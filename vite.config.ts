@@ -8,7 +8,7 @@ export default defineConfig({
     react(),
     eslintPlugin({
       cache: false,
-      include: ['./src/**/*.{js,jsx}'],
+      include: ['./src/**/*.{js,jsx,ts,tsx}'],
       exclude: []
     })
   ]

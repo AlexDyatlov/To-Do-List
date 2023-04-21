@@ -2,7 +2,7 @@ import Button from '../../common/button/button';
 import CustomSelect from '../../common/customSelect/customSelect';
 import TextField from '../../common/form/textField/textField';
 
-const Panel = () => {
+const Panel: React.FC = () => {
   const options = [
     { value: 'high', label: 'Высокий' },
     { value: 'mid', label: 'Средний' },
@@ -15,7 +15,7 @@ const Panel = () => {
         <li>
           <Button
             className="text-gray-600 font-medium p-4 text-lg hover:text-slate-900 text-slate-900 border-b-2 border-blue-500"
-            tag="btn"
+            tag="button"
             type="button"
           >
             Все
@@ -24,7 +24,7 @@ const Panel = () => {
         <li>
           <Button
             className="text-gray-600 font-medium p-4 text-lg hover:text-slate-900"
-            tag="btn"
+            tag="button"
             type="button"
           >
             Активные
@@ -33,7 +33,7 @@ const Panel = () => {
         <li>
           <Button
             className="text-gray-600 font-medium p-4 text-lg hover:text-slate-900"
-            tag="btn"
+            tag="button"
             type="button"
           >
             Выполненные
@@ -45,10 +45,10 @@ const Panel = () => {
         options={options}
         defaultLabel="Высокий"
       />
-      <TextField name="task" value="" placeholder="Новая задача" />
+      <TextField type='text' name="task" value="" placeholder="Новая задача" onChange={() => 'str'} />
       <Button
         className="text-blue-600 font-medium py-3 px-4 text-lg"
-        tag="btn"
+        tag="button"
         type="button"
       >
         Добавить

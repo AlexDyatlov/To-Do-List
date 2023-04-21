@@ -2,17 +2,28 @@ import { useEffect, useRef, useState } from 'react';
 
 import SvgIcon from '../svgIcon/svgIcon';
 
-const CustomSelect = ({ className, defaultLabel, options }) => {
+interface Option {
+  value: string;
+  label: string;
+}
+
+interface CustomSelectProps {
+  className?: string;
+  defaultLabel: string;
+  options: Option[];
+}
+
+const CustomSelect: React.FC<CustomSelectProps> = ({ className, defaultLabel, options }) => {
   const [visibleSelect, setVisibleSelect] = useState(false);
-  const sortRef = useRef(null);
+  const sortRef = useRef<HTMLDivElement>(null);
 
   const toggleVisibleSelect = () => {
     setVisibleSelect(!visibleSelect);
   };
 
-  const handleOutsideClick = e => {
-    const path = e.path || (e.composedPath && e.composedPath());
-    if (!path.includes(sortRef.current)) {
+  const handleOutsideClick = (event: MouseEvent) => {
+    const path = event.composedPath && event.composedPath();
+    if (sortRef.current && (!path || !path.includes(sortRef.current))) {
       setVisibleSelect(false);
     }
   };

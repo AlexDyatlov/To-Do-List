@@ -6,8 +6,10 @@ module.exports = {
   extends: [
     'standard',
     'plugin:react/recommended',
+    'plugin:@typescript-eslint/recommended',
     'plugin:react-hooks/recommended'
   ],
+  parser: '@typescript-eslint/parser',
   parserOptions: {
     ecmaFeatures: {
       jsx: true

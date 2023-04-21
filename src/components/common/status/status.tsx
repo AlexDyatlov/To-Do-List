@@ -1,4 +1,9 @@
-const getContent = (className = '', status) => {
+interface StatusProps {
+  className?: string;
+  status: string;
+}
+
+const getContent = (className = '', status: string): JSX.Element => {
   let value;
 
   switch (status) {
@@ -11,11 +16,13 @@ const getContent = (className = '', status) => {
   case 'low':
     value = <span className={className + 'inline-block rounded-xl p-2 px-4 w-fit bg-[#e6eed5] text-green-800 font-robo'}>Низкий💤</span>;
     break;
+  default:
+    value = <></>;
   }
   return value;
 };
 
-const Status = ({ className, status }) => {
+const Status: React.FC<StatusProps> = ({ className, status }) => {
   const content = getContent(className, status);
 
   return content;

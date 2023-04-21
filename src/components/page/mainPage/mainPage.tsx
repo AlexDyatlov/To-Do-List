@@ -2,7 +2,7 @@ import Panel from '../../ui/panel/panel';
 import Sidebar from '../../ui/sidebar/sidebar';
 import Table from '../../ui/table';
 
-const MainPage = () => {
+const MainPage: React.FC = () => {
   return (
     <div>
       <Panel />

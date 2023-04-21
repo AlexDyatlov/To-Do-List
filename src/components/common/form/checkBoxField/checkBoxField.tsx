@@ -1,4 +1,11 @@
-const CheckBoxField = ({ name, value, children, onChange }) => {
+interface CheckBoxFieldProps {
+  name: string;
+  value?: boolean;
+  children?: string;
+  onChange: (event: { name: string; value: boolean }) => void;
+}
+
+const CheckBoxField: React.FC<CheckBoxFieldProps> = ({ name, value, children, onChange }) => {
   const handleChange = () => {
     onChange({ name, value: !value });
   };

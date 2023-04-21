@@ -1,4 +1,4 @@
-const TableHeader = () => {
+const TableHeader: React.FC = () => {
   return (
     <ul className="flex items-center border border-gray-300 rounded-t-xl bg-[#f7f7f7] font-robo">
       <li className="px-5 py-4 text-base max-w-[120px] w-full border-r border-gray-300">

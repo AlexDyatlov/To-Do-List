@@ -1,5 +1,14 @@
-const TextField = ({ name, label, placeholder, value, type, onChange }) => {
-  const handleChange = ({ target }) => {
+interface TextFieldProps {
+  name: string;
+  type: string;
+  label?: string;
+  placeholder: string;
+  value: string | number;
+  onChange: (event: { name: string; value: string | number }) => void;
+}
+
+const TextField: React.FC<TextFieldProps> = ({ name, label, placeholder, value, type, onChange }) => {
+  const handleChange: React.ChangeEventHandler<HTMLInputElement> = ({ target }) => {
     onChange({ name: target.name, value: target.value });
   };
 
