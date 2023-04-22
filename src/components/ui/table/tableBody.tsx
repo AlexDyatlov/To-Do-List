@@ -1,5 +1,4 @@
 import { useState, useEffect } from 'react';
-import axios from 'axios';
 
 import Status from '../../common/status/status';
 import Button from '../../common/button/button';
@@ -8,13 +7,16 @@ import CheckBoxField from '../../common/form/checkBoxField/checkBoxField';
 
 import { ITask } from '../../../@types/task.interface';
 
+import taskService from '../../../services/task.service';
+
 const TableBody: React.FC = () => {
   const [tasks, setTasks] = useState<ITask[]>([]);
 
   useEffect(() => {
     const fetchData = async () => {
-      const response = await axios.get('http://localhost:3001/tasks');
-      setTasks(response.data);
+      const content = await taskService.get();
+
+      setTasks(content);
     };
 
     fetchData();
