@@ -1,0 +1,25 @@
+{
+  "tasks": [
+    {
+      "id": 0,
+      "completed": false,
+      "name": "Создание прототипа дзиайна для to-do list",
+      "status": "low",
+      "created_at": "1633576399367"
+    },
+    {
+      "id": 1,
+      "completed": false,
+      "name": "Создание пользовательского интерфейса приложения",
+      "status": "mid",
+      "created_at": "1633573058520"
+    },
+    {
+      "id": 2,
+      "completed": false,
+      "name": "Создание бизнес-логики приложения",
+      "status": "high",
+      "created_at": "1633573058357"
+    }
+  ]
+}
