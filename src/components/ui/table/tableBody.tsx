@@ -7,6 +7,8 @@ import Button from '../../common/button/button';
 import SvgIcon from '../../common/svgIcon/svgIcon';
 import CheckBoxField from '../../common/form/checkBoxField/checkBoxField';
 
+import { displayDate } from '../../../utils/displayDate';
+
 import { useAppDispatch } from '../../../store/createStore';
 import { fetchTasks, getTasks, getTasksLoadingStatus } from '../../../store/tasks';
 
@@ -39,7 +41,7 @@ const TableBody: React.FC = () => {
                     <Status status={task.status} />
                   </div>
                   <div className="p-5 max-w-[180px] w-full flex justify-center self-stretch items-center border-r border-gray-300">
-                    {task.created_at}
+                    {displayDate(task.created_at)}
                   </div>
                   <div className="p-5 flex justify-center self-stretch items-center grow">
                     <Button
