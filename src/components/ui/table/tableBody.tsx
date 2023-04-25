@@ -9,8 +9,10 @@ import CheckBoxField from '../../common/form/checkBoxField/checkBoxField';
 
 import { displayDate } from '../../../utils/displayDate';
 
+import { ITaskIdOnly } from '../../../@types/task.interface';
+
 import { useAppDispatch } from '../../../store/createStore';
-import { fetchTasks, getTasks, getTasksLoadingStatus } from '../../../store/tasks';
+import { deleteTask, fetchTasks, getTasks, getTasksLoadingStatus } from '../../../store/tasks';
 
 const TableBody: React.FC = () => {
   const dispatch = useAppDispatch();
@@ -48,6 +50,7 @@ const TableBody: React.FC = () => {
                       className="flex items-center justify-center w-7 h-7 border border-gray-800 rounded text-gray-500 hover:text-red-600 hover:border-red-600 transition-colors"
                       tag="button"
                       type="button"
+                      onClick={() => dispatch(deleteTask(task.id as unknown as ITaskIdOnly))}
                     >
                       <SvgIcon name="bin" size="16" className="" />
                     </Button>

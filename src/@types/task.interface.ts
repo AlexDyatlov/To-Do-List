@@ -5,3 +5,5 @@ export interface ITask {
   status: string;
   created_at: string;
 }
+
+export interface ITaskIdOnly extends Pick<ITask, 'id'> {}

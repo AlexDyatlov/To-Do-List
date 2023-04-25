@@ -2,7 +2,7 @@ import { PayloadAction, createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 
 import taskService from '../services/task.service';
 
-import { ITask } from '../@types/task.interface';
+import { ITask, ITaskIdOnly } from '../@types/task.interface';
 
 import { RootState } from './createStore';
 
@@ -34,6 +34,11 @@ export const createNewTask = createAsyncThunk<ITask, ITask>('tasks/createTaskSta
   return content;
 });
 
+export const deleteTask = createAsyncThunk<{ taskId: ITaskIdOnly, content: object }, ITaskIdOnly>('tasks/deleteTaskStatus', async (taskId: ITaskIdOnly) => {
+  const content = await taskService.removeTask(taskId);
+  return { taskId, content };
+});
+
 const tasksSlice = createSlice({
   name: 'tasks',
   initialState,
@@ -62,6 +67,16 @@ const tasksSlice = createSlice({
       state.status = Status.SUCCESS;
     });
     builder.addCase(createNewTask.rejected, (state) => {
+      state.status = Status.ERROR;
+    });
+    builder.addCase(deleteTask.pending, (state) => {
+      state.status = Status.LOADING;
+    });
+    builder.addCase(deleteTask.fulfilled, (state, { payload: { taskId } }) => {
+      state.items = state.items.filter(t => (t.id as unknown as ITaskIdOnly) !== taskId);
+      state.status = Status.SUCCESS;
+    });
+    builder.addCase(deleteTask.rejected, (state) => {
       state.status = Status.ERROR;
     });
   }

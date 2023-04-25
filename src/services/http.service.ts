@@ -8,7 +8,8 @@ const http = axios.create({
 
 const httpService = {
   get: http.get,
-  post: http.post
+  post: http.post,
+  delete: http.delete
 };
 
 export default httpService;

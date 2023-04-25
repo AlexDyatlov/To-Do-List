@@ -29,7 +29,8 @@ module.exports = {
     ],
     'multiline-ternary': 'off',
     quotes: ['error', 'single'],
-    'react/react-in-jsx-scope': 'off'
+    'react/react-in-jsx-scope': 'off',
+    '@typescript-eslint/no-empty-interface': 'off'
   },
   settings: {
     react: {
