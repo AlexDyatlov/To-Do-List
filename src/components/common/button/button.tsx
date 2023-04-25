@@ -6,6 +6,7 @@ interface ButtonProps {
   tag: TitleTag;
   onClick?: () => void;
   type?: 'button' | 'submit' | 'reset';
+  disabled?: boolean;
 }
 
 const initialStyles = 'transition-colors duration-300 ease-in-out';

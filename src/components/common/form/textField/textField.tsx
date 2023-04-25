@@ -3,12 +3,12 @@ interface TextFieldProps {
   type: string;
   label?: string;
   placeholder: string;
-  value: string | number;
-  onChange: (event: { name: string; value: string | number }) => void;
+  value: string;
+  onChange: (target: { name: string; value: string }) => void;
 }
 
 const TextField: React.FC<TextFieldProps> = ({ name, label, placeholder, value, type, onChange }) => {
-  const handleChange: React.ChangeEventHandler<HTMLInputElement> = ({ target }) => {
+  const handleChange = ({ target }: React.ChangeEvent<HTMLInputElement>) => {
     onChange({ name: target.name, value: target.value });
   };
 

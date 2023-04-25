@@ -28,6 +28,12 @@ export const fetchTasks = createAsyncThunk<ITask[]>('tasks/fetchTasksStatus', as
   return content;
 });
 
+export const createNewTask = createAsyncThunk<ITask, ITask>('tasks/createTaskStatus', async (payload: ITask) => {
+  const content = await taskService.createTask(payload);
+
+  return content;
+});
+
 const tasksSlice = createSlice({
   name: 'tasks',
   initialState,
@@ -47,6 +53,16 @@ const tasksSlice = createSlice({
     builder.addCase(fetchTasks.rejected, (state) => {
       state.status = Status.ERROR;
       state.items = [];
+    });
+    builder.addCase(createNewTask.pending, (state) => {
+      state.status = Status.LOADING;
+    });
+    builder.addCase(createNewTask.fulfilled, (state, { payload }) => {
+      state.items.push(payload);
+      state.status = Status.SUCCESS;
+    });
+    builder.addCase(createNewTask.rejected, (state) => {
+      state.status = Status.ERROR;
     });
   }
 });

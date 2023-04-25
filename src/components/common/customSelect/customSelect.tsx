@@ -11,11 +11,13 @@ interface CustomSelectProps {
   className?: string;
   defaultLabel: string;
   options: Option[];
+  onChange: (value: string) => void;
 }
 
-const CustomSelect: React.FC<CustomSelectProps> = ({ className, defaultLabel, options }) => {
+const CustomSelect: React.FC<CustomSelectProps> = ({ className, defaultLabel, options, onChange }) => {
   const [visibleSelect, setVisibleSelect] = useState(false);
   const sortRef = useRef<HTMLDivElement>(null);
+  const activeLabel = options.find(obj => obj.value === defaultLabel)?.label;
 
   const toggleVisibleSelect = () => {
     setVisibleSelect(!visibleSelect);
@@ -33,6 +35,10 @@ const CustomSelect: React.FC<CustomSelectProps> = ({ className, defaultLabel, op
     return () => setVisibleSelect(false);
   }, []);
 
+  const handleChange = (value: string) => {
+    onChange(value);
+  };
+
   return (
     <div className={className + ' ' + 'relative text-[#31352B] text-sm'} ref={sortRef}>
       <button
@@ -40,7 +46,7 @@ const CustomSelect: React.FC<CustomSelectProps> = ({ className, defaultLabel, op
         className="w-full text-left hover:text-blue-500 transition-colors py-[10px] px-[15px] border border-[#C2C2C2] rounded-[5px] bg-white hover:border-blue-500 focus-visible:border-blue-500 focus:outline-none"
         type="button"
       >
-        {defaultLabel}
+        {activeLabel ?? defaultLabel}
         <SvgIcon
           name="arrow-down"
           size="15"
@@ -58,6 +64,7 @@ const CustomSelect: React.FC<CustomSelectProps> = ({ className, defaultLabel, op
                 <button
                   className="py-2 w-full text-left hover:text-blue-500 transition-colors"
                   type="button"
+                  onClick={() => handleChange(option.value)}
                 >
                   {option.label} приоритет
                 </button>

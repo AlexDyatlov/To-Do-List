@@ -8,6 +8,10 @@ const taskService = {
   get: async () => {
     const { data } = await httpService.get<ITask[]>(taskEndpoint);
     return data;
+  },
+  createTask: async (payload: ITask) => {
+    const { data } = await httpService.post<ITask>(taskEndpoint, payload);
+    return data;
   }
 };
 
