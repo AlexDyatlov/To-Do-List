@@ -39,6 +39,11 @@ export const deleteTask = createAsyncThunk<{ taskId: ITaskIdOnly, content: objec
   return { taskId, content };
 });
 
+export const finishTask = createAsyncThunk<ITask, ITask>('tasks/completeTaskStatus', async (payload: ITask) => {
+  const content = await taskService.completeTask(payload);
+  return content;
+});
+
 const tasksSlice = createSlice({
   name: 'tasks',
   initialState,
@@ -77,6 +82,16 @@ const tasksSlice = createSlice({
       state.status = Status.SUCCESS;
     });
     builder.addCase(deleteTask.rejected, (state) => {
+      state.status = Status.ERROR;
+    });
+    builder.addCase(finishTask.pending, (state) => {
+      state.status = Status.LOADING;
+    });
+    builder.addCase(finishTask.fulfilled, (state, { payload }) => {
+      state.items[state.items.findIndex(t => t.id === payload.id)] = payload;
+      state.status = Status.SUCCESS;
+    });
+    builder.addCase(finishTask.rejected, (state) => {
       state.status = Status.ERROR;
     });
   }

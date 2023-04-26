@@ -2,7 +2,7 @@
   "tasks": [
     {
       "id": 0,
-      "completed": false,
+      "completed": true,
       "name": "Создание прототипа дзиайна для to-do list",
       "status": "low",
       "created_at": "1633573058357"

@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 
 import Title from '../../common/title/title';
@@ -9,12 +9,13 @@ import CheckBoxField from '../../common/form/checkBoxField/checkBoxField';
 
 import { displayDate } from '../../../utils/displayDate';
 
-import { ITaskIdOnly } from '../../../@types/task.interface';
+import { ITask, ITaskIdOnly } from '../../../@types/task.interface';
 
 import { useAppDispatch } from '../../../store/createStore';
-import { deleteTask, fetchTasks, getTasks, getTasksLoadingStatus } from '../../../store/tasks';
+import { deleteTask, fetchTasks, finishTask, getTasks, getTasksLoadingStatus } from '../../../store/tasks';
 
 const TableBody: React.FC = () => {
+  const [data, setData] = useState({ completed: false });
   const dispatch = useAppDispatch();
   const tasks = useSelector(getTasks());
   const status = useSelector(getTasksLoadingStatus());
@@ -22,6 +23,20 @@ const TableBody: React.FC = () => {
   useEffect(() => {
     dispatch(fetchTasks());
   }, [dispatch]);
+
+  const handlerFinishTask = (task: ITask) => {
+    setData((prevState) => ({
+      ...prevState,
+      ...task,
+      completed: !prevState.completed
+    }));
+
+    dispatch(finishTask({
+      ...data,
+      ...task,
+      completed: !task.completed
+    }));
+  };
 
   return (
     status === 'error'
@@ -34,7 +49,7 @@ const TableBody: React.FC = () => {
               <li className="border-b border-gray-300 last:border-b-0" key={task.id}>
                 <div className="flex items-center">
                   <div className="p-5 max-w-[120px] w-full flex justify-center self-stretch items-center border-r border-gray-300">
-                    <CheckBoxField name='task' value={task.completed} onChange={() => 'str'} />
+                    <CheckBoxField name='completed' value={task.completed} onChange={() => handlerFinishTask(task)} />
                   </div>
                   <div className="p-5 max-w-[400px] w-full flex self-stretch items-center border-r border-gray-300 font-robo">
                     {task.name}

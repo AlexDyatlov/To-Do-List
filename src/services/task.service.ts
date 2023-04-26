@@ -16,6 +16,10 @@ const taskService = {
   removeTask: async (taskId: ITaskIdOnly) => {
     const { data } = await httpService.delete<Promise<object>>(taskEndpoint + taskId);
     return data;
+  },
+  completeTask: async (payload: ITask) => {
+    const { data } = await httpService.patch<ITask>(taskEndpoint + payload.id, payload);
+    return data;
   }
 };
 

@@ -10,17 +10,13 @@ const CheckBoxField: React.FC<CheckBoxFieldProps> = ({ name, value, children, on
     onChange({ name, value: !value });
   };
 
-  CheckBoxField.defaultProps = {
-    value: false
-  };
-
   return (
     <>
       <div className="flex">
         <input
           className="w-6 h-6 border border-solid border-[#f60b0b] rounded-[3px] shrink-0 cursor-pointer"
           type="checkbox"
-          value=""
+          value={name}
           id={name}
           onChange={handleChange}
           checked={value}
