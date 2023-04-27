@@ -5,8 +5,8 @@ import { ITask, ITaskIdOnly } from '../@types/task.interface';
 const taskEndpoint = 'tasks/';
 
 const taskService = {
-  get: async () => {
-    const { data } = await httpService.get<ITask[]>(taskEndpoint);
+  get: async (payload: string) => {
+    const { data } = await httpService.get<ITask[]>(taskEndpoint + payload);
     return data;
   },
   createTask: async (payload: ITask) => {

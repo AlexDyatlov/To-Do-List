@@ -2,9 +2,11 @@ import { combineReducers, configureStore } from '@reduxjs/toolkit';
 import { useDispatch } from 'react-redux';
 
 import tasksReducer from './tasks';
+import filtersReducer from './filters';
 
 const rootReducer = combineReducers({
-  tasks: tasksReducer
+  tasks: tasksReducer,
+  filters: filtersReducer
 });
 
 export function createStore() {

@@ -22,8 +22,8 @@ const initialState: TaskSliceState = {
   status: Status.LOADING
 };
 
-export const fetchTasks = createAsyncThunk<ITask[]>('tasks/fetchTasksStatus', async () => {
-  const content = await taskService.get();
+export const fetchTasks = createAsyncThunk<ITask[], string>('tasks/fetchTasksStatus', async (payload: string) => {
+  const content = await taskService.get(payload);
 
   return content;
 });

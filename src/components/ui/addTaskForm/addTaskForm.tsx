@@ -74,7 +74,7 @@ const AddTaskForm: React.FC = () => {
       <TextField type='text' name="name" value={data.name || ''} placeholder="Новая задача" onChange={handleChange} />
       <Button
         className={'text-blue-600 font-medium py-3 px-4 text-lg rounded-md' +
-          (!isValid ? ' text-[#9d9a9a] bg-[#f0f0f0] cursor-not-allowed' : '')
+          (!isValid ? ' !text-[#9d9a9a] bg-[#f0f0f0] cursor-not-allowed' : '')
         }
         tag="button"
         type="submit"
