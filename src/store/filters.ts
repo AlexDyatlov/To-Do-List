@@ -2,33 +2,37 @@ import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 
 import { RootState } from './createStore';
 
-interface filtersSliceState {
-  itemStatus: string;
-  itemCompleted: null | boolean;
+export interface filtersSliceState {
+  taskStatus: string;
+  taskCompleted: string;
 }
 
 const initialState: filtersSliceState = {
-  itemStatus: '',
-  itemCompleted: null
+  taskStatus: '',
+  taskCompleted: ''
 };
 
 const filtersSlice = createSlice({
   name: 'filters',
   initialState,
   reducers: {
-    setItemStatus(state, { payload }: PayloadAction<string>) {
-      state.itemStatus = payload;
+    setTaskStatus(state, { payload }: PayloadAction<string>) {
+      state.taskStatus = payload;
     },
-    setItemCompleted(state, { payload }: PayloadAction<null | boolean>) {
-      state.itemCompleted = payload;
+    setTaskCompleted(state, { payload }: PayloadAction<string>) {
+      state.taskCompleted = payload;
+    },
+    setFilters(state, { payload }: PayloadAction<filtersSliceState>) {
+      state.taskStatus = payload?.taskStatus || '';
+      state.taskCompleted = payload?.taskCompleted || '';
     }
   }
 });
 
 const { reducer: filtersReducer, actions } = filtersSlice;
-export const { setItemStatus, setItemCompleted } = actions;
+export const { setTaskStatus, setTaskCompleted, setFilters } = actions;
 
-export const getItemStatus = () => (state: RootState) => state.filters.itemStatus;
-export const getItemCompleted = () => (state: RootState) => state.filters.itemCompleted;
+export const getTaskStatus = () => (state: RootState) => state.filters.taskStatus;
+export const getTaskCompleted = () => (state: RootState) => state.filters.taskCompleted;
 
 export default filtersReducer;

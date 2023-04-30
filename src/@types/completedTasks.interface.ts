@@ -1,4 +1,4 @@
 export interface ICompletedTasks {
   name: string;
-  completed: null | boolean
+  completed: string | boolean
 }

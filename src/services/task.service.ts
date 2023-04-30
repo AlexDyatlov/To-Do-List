@@ -1,12 +1,13 @@
 import httpService from './http.service';
 
 import { ITask, ITaskIdOnly } from '../@types/task.interface';
+import { IFiltersParams } from '../@types/filtersParams.interface';
 
 const taskEndpoint = 'tasks/';
 
 const taskService = {
-  get: async (payload: string) => {
-    const { data } = await httpService.get<ITask[]>(taskEndpoint + payload);
+  get: async ({ urlStatus, urlCompleted }: IFiltersParams) => {
+    const { data } = await httpService.get<ITask[]>(taskEndpoint + `?${urlStatus}${urlCompleted}`);
     return data;
   },
   createTask: async (payload: ITask) => {

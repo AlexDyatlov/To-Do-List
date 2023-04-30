@@ -26,7 +26,7 @@ export function displayDate(timestamp: string) {
   const date = new Date(Number(timestamp));
   const dayOfWeek = daysOfWeek[date.getDay() - 1];
   const dayOfMonth = date.getDate();
-  const month = monthsOfYear[date.getMonth() + 1];
+  const month = monthsOfYear[date.getMonth()];
   const year = date.getFullYear();
   const hours = String(date.getHours()).padStart(2, '0');
   const minutes = String(date.getMinutes()).padStart(2, '0');

@@ -1,19 +1,19 @@
 import { useSelector } from 'react-redux';
-import { useAppDispatch } from '../../../store/createStore';
 
 import Button from '../../common/button/button';
 import Status from '../../common/status/status';
 import Title from '../../common/title/title';
 
-import { getItemStatus, setItemStatus } from '../../../store/filters';
+import { useAppDispatch } from '../../../store/createStore';
+import { getTaskStatus, setTaskStatus } from '../../../store/filters';
 
 const Sidebar: React.FC = () => {
   const priorities: string[] = ['high', 'mid', 'low'];
   const dispatch = useAppDispatch();
-  const taskStatus = useSelector(getItemStatus());
+  const taskStatus = useSelector(getTaskStatus());
 
   const onChangeStatus = (status: string) => {
-    dispatch(setItemStatus(status));
+    dispatch(setTaskStatus(status));
   };
 
   return (

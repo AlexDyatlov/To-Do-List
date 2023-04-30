@@ -1,5 +1,7 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import qs from 'qs';
 
 import Title from '../../common/title/title';
 import Status from '../../common/status/status';
@@ -13,23 +15,58 @@ import { ITask, ITaskIdOnly } from '../../../@types/task.interface';
 
 import { useAppDispatch } from '../../../store/createStore';
 import { deleteTask, fetchTasks, finishTask, getTasks, getTasksLoadingStatus } from '../../../store/tasks';
-import { getItemCompleted, getItemStatus } from '../../../store/filters';
+import { filtersSliceState, getTaskCompleted, getTaskStatus, setFilters } from '../../../store/filters';
 
 const TableBody: React.FC = () => {
   const [data, setData] = useState({ completed: false });
+  const isMounted = useRef(false);
   const dispatch = useAppDispatch();
+  const navigate = useNavigate();
+
   const tasks = useSelector(getTasks());
   const status = useSelector(getTasksLoadingStatus());
-  const taskStatus = useSelector(getItemStatus());
-  const completedTasks = useSelector(getItemCompleted());
+  const taskStatus = useSelector(getTaskStatus());
+  const taskCompleted = useSelector(getTaskCompleted());
 
-  const urlStatus = taskStatus ? `?status=${taskStatus}` : '';
-  const urlCompleted = completedTasks !== null ? `&completed=${completedTasks}` : '';
-  const filterOptions = urlStatus === '' ? `?${urlCompleted}` : `${urlStatus}${urlCompleted}`;
+  const getTasksFromUrlParams = () => {
+    const urlStatus = taskStatus ? `status=${taskStatus}` : '';
+    const urlCompleted = taskCompleted ? `&completed=${taskCompleted}` : '';
+
+    dispatch(fetchTasks({
+      urlStatus,
+      urlCompleted
+    }));
+  };
+
+  // Если изменили параметры и был первый рендер
+  useEffect(() => {
+    if (isMounted.current) {
+      const params = {
+        taskStatus: taskStatus !== '' ? taskStatus : null,
+        taskCompleted: taskCompleted !== '' ? taskCompleted : null
+      };
+      const queryString = qs.stringify(params, { skipNulls: true });
+
+      navigate(`/?${queryString}`);
+    }
+
+    if (!window.location.search) {
+      getTasksFromUrlParams();
+    }
+  }, [taskStatus, taskCompleted]);
 
   useEffect(() => {
-    dispatch(fetchTasks(filterOptions));
-  }, [dispatch, filterOptions]);
+    getTasksFromUrlParams();
+  }, [taskStatus, taskCompleted]);
+
+  // Парсим параметры при первом рендере
+  useEffect(() => {
+    if (window.location.search) {
+      const params = qs.parse(window.location.search.substring(1)) as unknown as filtersSliceState;
+      dispatch(setFilters(params));
+    }
+    isMounted.current = true;
+  }, []);
 
   const handlerFinishTask = (task: ITask) => {
     setData((prevState) => ({

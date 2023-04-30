@@ -5,18 +5,18 @@ import { ICompletedTasks } from '../../../@types/completedTasks.interface';
 import Button from '../../common/button/button';
 
 import { useAppDispatch } from '../../../store/createStore';
-import { getItemCompleted, setItemCompleted } from '../../../store/filters';
+import { getTaskCompleted, setTaskCompleted } from '../../../store/filters';
 
 const ListButtons: React.FC = () => {
   const btnsContent: ICompletedTasks[] = [
-    { name: 'Все', completed: null },
+    { name: 'Все', completed: '' },
     { name: 'Активные', completed: false },
     { name: 'Выполненные', completed: true }];
   const dispatch = useAppDispatch();
-  const completedTasks = useSelector(getItemCompleted());
+  const taskCompleted = useSelector(getTaskCompleted());
 
-  const onChangeItem = (value: null | boolean) => {
-    dispatch(setItemCompleted(value));
+  const onChangeItem = (value: string) => {
+    dispatch(setTaskCompleted(value));
   };
 
   return (
@@ -25,12 +25,12 @@ const ListButtons: React.FC = () => {
         btnsContent.map((item, index) => (
           <li key={index}>
             <Button
-              className={'text-gray-600 font-medium p-4 text-lg hover:text-slate-900 text-slate-900 border-b-2 border-transparent' +
-                (completedTasks === item.completed ? ' !border-blue-500' : '')
+              className={'text-gray-600 font-medium p-4 text-lg hover:text-slate-900 border-b-2 border-transparent' +
+                (taskCompleted === String(item.completed) ? ' !border-blue-500 text-slate-900' : '')
               }
               tag="button"
               type="button"
-              onClick={() => onChangeItem(item.completed)}
+              onClick={() => onChangeItem(String(item.completed))}
             >
               {item.name}
             </Button>

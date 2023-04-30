@@ -3,6 +3,7 @@ import { PayloadAction, createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import taskService from '../services/task.service';
 
 import { ITask, ITaskIdOnly } from '../@types/task.interface';
+import { IFiltersParams } from '../@types/filtersParams.interface';
 
 import { RootState } from './createStore';
 
@@ -22,7 +23,7 @@ const initialState: TaskSliceState = {
   status: Status.LOADING
 };
 
-export const fetchTasks = createAsyncThunk<ITask[], string>('tasks/fetchTasksStatus', async (payload: string) => {
+export const fetchTasks = createAsyncThunk<ITask[], IFiltersParams>('tasks/fetchTasksStatus', async (payload: IFiltersParams) => {
   const content = await taskService.get(payload);
 
   return content;
