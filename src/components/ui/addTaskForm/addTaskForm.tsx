@@ -9,7 +9,7 @@ import { ITask } from '../../../@types/task.interface';
 import { generateId } from '../../../utils/generateId';
 
 import { useAppDispatch } from '../../../store/createStore';
-import { createNewTask } from '../../../store/tasks';
+import { createNewTask } from '../../../store/tasks/asyncActions';
 
 const myObj: ITask = {
   id: generateId(),

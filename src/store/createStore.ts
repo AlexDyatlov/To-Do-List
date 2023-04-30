@@ -1,8 +1,8 @@
 import { combineReducers, configureStore } from '@reduxjs/toolkit';
 import { useDispatch } from 'react-redux';
 
-import tasksReducer from './tasks';
-import filtersReducer from './filters';
+import tasksReducer from './tasks/reducer';
+import filtersReducer from './filters/reducer';
 
 const rootReducer = combineReducers({
   tasks: tasksReducer,

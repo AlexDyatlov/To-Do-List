@@ -1,11 +1,6 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 
-import { RootState } from './createStore';
-
-export interface filtersSliceState {
-  taskStatus: string;
-  taskCompleted: string;
-}
+import { filtersSliceState } from './types';
 
 const initialState: filtersSliceState = {
   taskStatus: '',
@@ -31,8 +26,5 @@ const filtersSlice = createSlice({
 
 const { reducer: filtersReducer, actions } = filtersSlice;
 export const { setTaskStatus, setTaskCompleted, setFilters } = actions;
-
-export const getTaskStatus = () => (state: RootState) => state.filters.taskStatus;
-export const getTaskCompleted = () => (state: RootState) => state.filters.taskCompleted;
 
 export default filtersReducer;

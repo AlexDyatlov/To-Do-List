@@ -1,58 +1,19 @@
-import { PayloadAction, createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import { createSlice } from '@reduxjs/toolkit';
 
-import taskService from '../services/task.service';
+import { createNewTask, deleteTask, fetchTasks, finishTask } from './asyncActions';
 
-import { ITask, ITaskIdOnly } from '../@types/task.interface';
-import { IFiltersParams } from '../@types/filtersParams.interface';
-
-import { RootState } from './createStore';
-
-enum Status {
-  LOADING = 'loading',
-  SUCCESS = 'success',
-  ERROR = 'error',
-}
-
-interface TaskSliceState {
-  items: ITask[];
-  status: Status;
-}
+import { ITaskIdOnly } from '../../@types/task.interface';
+import { Status, TaskSliceState } from './types';
 
 const initialState: TaskSliceState = {
   items: [],
   status: Status.LOADING
 };
 
-export const fetchTasks = createAsyncThunk<ITask[], IFiltersParams>('tasks/fetchTasksStatus', async (payload: IFiltersParams) => {
-  const content = await taskService.get(payload);
-
-  return content;
-});
-
-export const createNewTask = createAsyncThunk<ITask, ITask>('tasks/createTaskStatus', async (payload: ITask) => {
-  const content = await taskService.createTask(payload);
-
-  return content;
-});
-
-export const deleteTask = createAsyncThunk<{ taskId: ITaskIdOnly, content: object }, ITaskIdOnly>('tasks/deleteTaskStatus', async (taskId: ITaskIdOnly) => {
-  const content = await taskService.removeTask(taskId);
-  return { taskId, content };
-});
-
-export const finishTask = createAsyncThunk<ITask, ITask>('tasks/completeTaskStatus', async (payload: ITask) => {
-  const content = await taskService.completeTask(payload);
-  return content;
-});
-
 const tasksSlice = createSlice({
   name: 'tasks',
   initialState,
-  reducers: {
-    getItems: (state, { payload }: PayloadAction<ITask[]>) => {
-      state.items = payload;
-    }
-  },
+  reducers: {},
   extraReducers: (builder) => {
     builder.addCase(fetchTasks.pending, (state) => {
       state.status = Status.LOADING;
@@ -99,8 +60,5 @@ const tasksSlice = createSlice({
 });
 
 const { reducer: tasksReducer } = tasksSlice;
-
-export const getTasks = () => (state: RootState) => state.tasks.items;
-export const getTasksLoadingStatus = () => (state: RootState) => state.tasks.status;
 
 export default tasksReducer;

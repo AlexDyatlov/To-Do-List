@@ -12,10 +12,13 @@ import CheckBoxField from '../../common/form/checkBoxField/checkBoxField';
 import { displayDate } from '../../../utils/displayDate';
 
 import { ITask, ITaskIdOnly } from '../../../@types/task.interface';
+import { filtersSliceState } from '../../../store/filters/types';
 
 import { useAppDispatch } from '../../../store/createStore';
-import { deleteTask, fetchTasks, finishTask, getTasks, getTasksLoadingStatus } from '../../../store/tasks';
-import { filtersSliceState, getTaskCompleted, getTaskStatus, setFilters } from '../../../store/filters';
+import { getTasks, getTasksLoadingStatus } from '../../../store/tasks/selectors';
+import { getTaskCompleted, getTaskStatus } from '../../../store/filters/selectors';
+import { deleteTask, fetchTasks, finishTask } from '../../../store/tasks/asyncActions';
+import { setFilters } from '../../../store/filters/reducer';
 
 const TableBody: React.FC = () => {
   const [data, setData] = useState({ completed: false });

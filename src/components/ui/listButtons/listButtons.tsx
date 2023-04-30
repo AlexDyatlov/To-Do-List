@@ -5,7 +5,8 @@ import { ICompletedTasks } from '../../../@types/completedTasks.interface';
 import Button from '../../common/button/button';
 
 import { useAppDispatch } from '../../../store/createStore';
-import { getTaskCompleted, setTaskCompleted } from '../../../store/filters';
+import { getTaskCompleted } from '../../../store/filters/selectors';
+import { setTaskCompleted } from '../../../store/filters/reducer';
 
 const ListButtons: React.FC = () => {
   const btnsContent: ICompletedTasks[] = [

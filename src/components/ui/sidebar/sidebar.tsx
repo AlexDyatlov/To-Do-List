@@ -5,7 +5,8 @@ import Status from '../../common/status/status';
 import Title from '../../common/title/title';
 
 import { useAppDispatch } from '../../../store/createStore';
-import { getTaskStatus, setTaskStatus } from '../../../store/filters';
+import { getTaskStatus } from '../../../store/filters/selectors';
+import { setTaskStatus } from '../../../store/filters/reducer';
 
 const Sidebar: React.FC = () => {
   const priorities: string[] = ['high', 'mid', 'low'];
