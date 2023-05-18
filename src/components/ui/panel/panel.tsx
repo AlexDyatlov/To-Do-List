@@ -3,7 +3,7 @@ import AddTaskForm from '../addTaskForm/addTaskForm';
 
 const Panel: React.FC = () => {
   return (
-    <div className="border-y border-gray-300 flex items-center gap-3 mb-5">
+    <div className="border-y border-gray-300 flex items-center gap-3 mb-5 xl:flex-col xl:items-start xl:pt-1">
       <ListButtons />
       <AddTaskForm />
     </div>

@@ -91,24 +91,24 @@ const TableBody: React.FC = () => {
       : status === 'loading'
         ? <Title className='text-xl font-semibold text-[#363853] mt-5' tag='h3'>Загрузка...</Title>
         : tasks.length
-          ? <ul className="border-x border-b border-gray-300 rounded-b-xl bg-white">
+          ? <ul className="border-x border-b border-gray-300 rounded-b-xl bg-white lg:w-[768px]">
             {
               tasks.map(task => (
                 <li className="border-b border-gray-300 last:border-b-0" key={task.id}>
                   <div className="flex items-center">
-                    <div className="p-5 max-w-[120px] w-full flex justify-center self-stretch items-center border-r border-gray-300">
+                    <div className="p-5 max-w-[120px] w-full flex justify-center self-stretch items-center border-r border-gray-300 lg:shrink-0">
                       <CheckBoxField name='completed' value={task.completed} onChange={() => handlerFinishTask(task)} />
                     </div>
-                    <div className="p-5 max-w-[400px] w-full flex self-stretch items-center border-r border-gray-300 font-robo">
+                    <div className="p-5 max-w-[400px] w-full flex self-stretch items-center border-r border-gray-300 font-robo lg:max-w-[230px] lg:shrink-0">
                       {task.name}
                     </div>
-                    <div className="p-5 max-w-[170px] w-full flex justify-center self-stretch items-center border-r border-gray-300">
+                    <div className="p-5 max-w-[170px] w-full flex justify-center self-stretch items-center border-r border-gray-300 lg:shrink-0">
                       <Status status={task.status} />
                     </div>
-                    <div className="p-5 max-w-[180px] w-full flex justify-center self-stretch items-center border-r border-gray-300">
+                    <div className="p-5 max-w-[180px] w-full flex justify-center self-stretch items-center border-r border-gray-300 lg:shrink-0">
                       {displayDate(task.created_at)}
                     </div>
-                    <div className="p-5 flex justify-center self-stretch items-center grow">
+                    <div className="p-5 flex justify-center self-stretch items-center grow lg:shrink-0 lg:max-w-[68px]">
                       <Button
                         className="flex items-center justify-center w-7 h-7 border border-gray-800 rounded text-gray-500 hover:text-red-600 hover:border-red-600 transition-colors"
                         tag="button"

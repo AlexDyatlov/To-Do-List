@@ -21,10 +21,10 @@ const ListButtons: React.FC = () => {
   };
 
   return (
-    <ul className="w-max flex items-center relative after:absolute after:right-0 after:w-px after:h-6 after:-translate-y-1/2 after:top-2/4 after:bg-gray-300">
+    <ul className="w-max flex items-center relative after:absolute after:right-0 after:w-px after:h-6 after:-translate-y-1/2 after:top-2/4 after:bg-gray-300 xl:order-1 xl:after:content-none md:w-full md:overflow-x-auto md:snap-x">
       {
         btnsContent.map((item, index) => (
-          <li key={index}>
+          <li className="md:snap-start" key={index}>
             <Button
               className={'text-gray-600 font-medium p-4 text-lg hover:text-slate-900 border-b-2 border-transparent' +
                 (taskCompleted === String(item.completed) ? ' !border-blue-500 text-slate-900' : '')

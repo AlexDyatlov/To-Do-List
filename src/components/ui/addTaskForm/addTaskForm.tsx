@@ -64,16 +64,16 @@ const AddTaskForm: React.FC = () => {
   };
 
   return (
-    <form className='w-full flex items-center gap-3' onSubmit={handlerAddTask}>
+    <form className='w-full flex items-center gap-3 md:flex-col' onSubmit={handlerAddTask}>
       <CustomSelect
-        className="max-w-[130px] w-full"
+        className="max-w-[130px] w-full md:max-w-full"
         options={options}
         defaultLabel={data.status}
         onChange={handleChangeStatus}
       />
       <TextField type='text' name="name" value={data.name || ''} placeholder="Новая задача" onChange={handleChange} />
       <Button
-        className={'text-blue-600 font-medium py-3 px-4 text-lg rounded-md' +
+        className={'text-blue-600 font-medium py-3 px-4 text-lg rounded-md md:w-full md:py-2' +
           (!isValid ? ' !text-[#9d9a9a] bg-[#f0f0f0] cursor-not-allowed' : '')
         }
         tag="button"

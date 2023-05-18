@@ -8,13 +8,13 @@ const getContent = (className = '', status: string): JSX.Element => {
 
   switch (status) {
   case 'high':
-    value = <span className={className + 'inline-block rounded-xl p-2 px-4 w-fit bg-[#efd6d5] text-[#840500] font-robo'}>Высокий🔥</span>;
+    value = <span className={className + 'inline-block whitespace-nowrap rounded-xl p-2 px-4 w-fit bg-[#efd6d5] text-[#840500] font-robo'}>Высокий🔥</span>;
     break;
   case 'mid':
-    value = <span className={className + 'inline-block rounded-xl p-2 px-4 w-fit bg-[#faedcd] text-yellow-800 font-robo'}>Средний👨‍💻</span>;
+    value = <span className={className + 'inline-block whitespace-nowrap rounded-xl p-2 px-4 w-fit bg-[#faedcd] text-yellow-800 font-robo'}>Средний👨‍💻</span>;
     break;
   case 'low':
-    value = <span className={className + 'inline-block rounded-xl p-2 px-4 w-fit bg-[#e6eed5] text-green-800 font-robo'}>Низкий💤</span>;
+    value = <span className={className + 'inline-block whitespace-nowrap rounded-xl p-2 px-4 w-fit bg-[#e6eed5] text-green-800 font-robo'}>Низкий💤</span>;
     break;
   default:
     value = <></>;

@@ -3,7 +3,7 @@ import TableBody from './tableBody';
 
 const Table = () => {
   return (
-    <div>
+    <div className="lg:overflow-x-auto">
       <TableHeader />
       <TableBody />
     </div>
