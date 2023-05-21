@@ -15,11 +15,7 @@ const Button: React.FC<ButtonProps> = ({ className, children, tag, onClick, ...r
   const TagName = tag;
 
   return (
-    <TagName
-      className={initialStyles + ' ' + className}
-      onClick={onClick}
-      {...rest}
-    >
+    <TagName className={initialStyles + ' ' + className} onClick={onClick} {...rest}>
       {children}
     </TagName>
   );

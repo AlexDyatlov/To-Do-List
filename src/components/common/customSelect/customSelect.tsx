@@ -14,10 +14,15 @@ interface CustomSelectProps {
   onChange: (value: string) => void;
 }
 
-const CustomSelect: React.FC<CustomSelectProps> = ({ className, defaultLabel, options, onChange }) => {
+const CustomSelect: React.FC<CustomSelectProps> = ({
+  className,
+  defaultLabel,
+  options,
+  onChange
+}) => {
   const [visibleSelect, setVisibleSelect] = useState(false);
   const sortRef = useRef<HTMLDivElement>(null);
-  const activeLabel = options.find(obj => obj.value === defaultLabel)?.label;
+  const activeLabel = options.find((obj) => obj.value === defaultLabel)?.label;
 
   const toggleVisibleSelect = () => {
     setVisibleSelect(!visibleSelect);
@@ -40,10 +45,10 @@ const CustomSelect: React.FC<CustomSelectProps> = ({ className, defaultLabel, op
   };
 
   return (
-    <div className={className + ' ' + 'relative text-[#31352B] text-sm'} ref={sortRef}>
+    <div className={className + ' ' + 'relative text-sm text-[#31352B]'} ref={sortRef}>
       <button
         onClick={toggleVisibleSelect}
-        className="w-full text-left hover:text-blue-500 transition-colors py-[10px] px-[15px] border border-[#C2C2C2] rounded-[5px] bg-white hover:border-blue-500 focus-visible:border-blue-500 focus:outline-none"
+        className="w-full rounded-[5px] border border-[#C2C2C2] bg-white px-[15px] py-[10px] text-left transition-colors hover:border-blue-500 hover:text-blue-500 focus:outline-none focus-visible:border-blue-500"
         type="button"
       >
         {activeLabel ?? defaultLabel}
@@ -51,18 +56,18 @@ const CustomSelect: React.FC<CustomSelectProps> = ({ className, defaultLabel, op
           name="arrow-down"
           size="15"
           className={
-            'absolute right-[15px] top-2/4 -translate-y-1/2 text-current pointer-events-none transition-transform' +
+            'pointer-events-none absolute right-[15px] top-2/4 -translate-y-1/2 text-current transition-transform' +
             (visibleSelect ? ' rotate-180' : '')
           }
         />
       </button>
       {visibleSelect && (
-        <ul className="absolute left-0 right-0 top-[55px] bg-white border border-[#C2C2C2] rounded-[3px] p-[15px]">
+        <ul className="absolute left-0 right-0 top-[55px] rounded-[3px] border border-[#C2C2C2] bg-white p-[15px]">
           {options.map((option, index) => {
             return (
               <li key={`${option.value}_${index}`}>
                 <button
-                  className="py-2 w-full text-left hover:text-blue-500 transition-colors"
+                  className="w-full py-2 text-left transition-colors hover:text-blue-500"
                   type="button"
                   onClick={() => handleChange(option.value)}
                 >

@@ -35,7 +35,11 @@ export function displayDate(timestamp: string) {
   const strDate = `${dayOfWeek}, ${dayOfMonth} ${month} ${year} г.`;
   const strTime = `в ${hours}:${minutes}:${seconds}`;
 
-  const fullDate: JSX.Element = <>{strDate} <br /> {strTime}</>;
+  const fullDate: JSX.Element = (
+    <>
+      {strDate} <br /> {strTime}
+    </>
+  );
 
   return fullDate;
 }

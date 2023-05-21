@@ -19,7 +19,7 @@ module.exports = {
   },
   plugins: ['react', 'react-hooks'],
   rules: {
-    indent: ['error', 2],
+    indent: ['error', 2, { SwitchCase: 1 }],
     semi: [2, 'always'],
     'react/prop-types': 'off',
     'eol-last': ['error', 'always'],

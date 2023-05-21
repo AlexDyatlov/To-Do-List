@@ -3,9 +3,11 @@ import Main from './layouts/main/main';
 
 const App: React.FC = () => {
   return (
-    <div className="max-w-[1170px] mx-auto py-8 px-10 xl:px-6 md:px-[15px]">
-      <Title className="text-2xl font-bold text-[#363853] mb-5" tag="h1">Список задач</Title>
-      <Main/>
+    <div className="mx-auto max-w-[1170px] px-10 py-8 xl:px-6 md:px-[15px]">
+      <Title className="mb-5 text-2xl font-bold text-[#363853]" tag="h1">
+        Список задач
+      </Title>
+      <Main />
     </div>
   );
 };

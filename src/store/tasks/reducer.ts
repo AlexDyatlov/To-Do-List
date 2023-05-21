@@ -40,7 +40,7 @@ const tasksSlice = createSlice({
       state.status = Status.LOADING;
     });
     builder.addCase(deleteTask.fulfilled, (state, { payload: { taskId } }) => {
-      state.items = state.items.filter(t => (t.id as unknown as ITaskIdOnly) !== taskId);
+      state.items = state.items.filter((t) => (t.id as unknown as ITaskIdOnly) !== taskId);
       state.status = Status.SUCCESS;
     });
     builder.addCase(deleteTask.rejected, (state) => {
@@ -50,7 +50,7 @@ const tasksSlice = createSlice({
       state.status = Status.LOADING;
     });
     builder.addCase(finishTask.fulfilled, (state, { payload }) => {
-      state.items[state.items.findIndex(t => t.id === payload.id)] = payload;
+      state.items[state.items.findIndex((t) => t.id === payload.id)] = payload;
       state.status = Status.SUCCESS;
     });
     builder.addCase(finishTask.rejected, (state) => {

@@ -6,9 +6,9 @@ const MainPage: React.FC = () => {
   return (
     <>
       <Panel />
-      <div className='grid grid-cols-[200px_1fr] gap-8 xl:grid-cols-1'>
+      <div className="grid grid-cols-[200px_1fr] gap-8 xl:grid-cols-1">
         <Sidebar />
-        <Table/>
+        <Table />
       </div>
     </>
   );

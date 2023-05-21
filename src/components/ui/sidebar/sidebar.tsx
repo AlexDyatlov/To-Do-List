@@ -18,22 +18,33 @@ const Sidebar: React.FC = () => {
   };
 
   return (
-    <div className="self-start bg-white border border-[#ECECEC] rounded-xl p-5">
-      <Title className="text-xl font-semibold text-[#363853] mb-5" tag="div">
+    <div className="self-start rounded-xl border border-[#ECECEC] bg-white p-5">
+      <Title className="mb-5 text-xl font-semibold text-[#363853]" tag="div">
         Приоритеты
       </Title>
       <ul className="grid gap-3">
-        {
-          priorities.map((item, index) => (
-            <li key={index}>
-              <Button className="w-full" type="button" tag="button" onClick={() => onChangeStatus(item)}>
-                <Status className={'w-full ' + (taskStatus === item ? 'shadow-sm shadow-current ' : '') } status={item} />
-              </Button>
-            </li>
-          ))
-        }
+        {priorities.map((item, index) => (
+          <li key={index}>
+            <Button
+              className="w-full"
+              type="button"
+              tag="button"
+              onClick={() => onChangeStatus(item)}
+            >
+              <Status
+                className={'w-full ' + (taskStatus === item ? 'shadow-sm shadow-current ' : '')}
+                status={item}
+              />
+            </Button>
+          </li>
+        ))}
         <li>
-          <Button className="w-full underline mt-2 p-2 hover:text-pink-700" type="button" tag="button" onClick={() => onChangeStatus('')}>
+          <Button
+            className="mt-2 w-full p-2 underline hover:text-pink-700"
+            type="button"
+            tag="button"
+            onClick={() => onChangeStatus('')}
+          >
             Сбросить
           </Button>
         </li>

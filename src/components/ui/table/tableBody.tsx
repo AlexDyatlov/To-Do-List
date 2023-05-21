@@ -35,10 +35,12 @@ const TableBody: React.FC = () => {
     const urlStatus = taskStatus ? `status=${taskStatus}` : '';
     const urlCompleted = taskCompleted ? `&completed=${taskCompleted}` : '';
 
-    dispatch(fetchTasks({
-      urlStatus,
-      urlCompleted
-    }));
+    dispatch(
+      fetchTasks({
+        urlStatus,
+        urlCompleted
+      })
+    );
   };
 
   // Если изменили параметры и был первый рендер
@@ -78,54 +80,62 @@ const TableBody: React.FC = () => {
       completed: !prevState.completed
     }));
 
-    dispatch(finishTask({
-      ...data,
-      ...task,
-      completed: !task.completed
-    }));
+    dispatch(
+      finishTask({
+        ...data,
+        ...task,
+        completed: !task.completed
+      })
+    );
   };
 
-  return (
-    status === 'error'
-      ? <Title className='text-xl font-semibold text-red-600 mt-5' tag='h3'>Произошла ошибка</Title>
-      : status === 'loading'
-        ? <Title className='text-xl font-semibold text-[#363853] mt-5' tag='h3'>Загрузка...</Title>
-        : tasks.length
-          ? <ul className="border-x border-b border-gray-300 rounded-b-xl bg-white lg:w-[768px]">
-            {
-              tasks.map(task => (
-                <li className="border-b border-gray-300 last:border-b-0" key={task.id}>
-                  <div className="flex items-center">
-                    <div className="p-5 max-w-[120px] w-full flex justify-center self-stretch items-center border-r border-gray-300 lg:shrink-0">
-                      <CheckBoxField name='completed' value={task.completed} onChange={() => handlerFinishTask(task)} />
-                    </div>
-                    <div className="p-5 max-w-[400px] w-full flex self-stretch items-center border-r border-gray-300 font-robo lg:max-w-[230px] lg:shrink-0">
-                      {task.name}
-                    </div>
-                    <div className="p-5 max-w-[170px] w-full flex justify-center self-stretch items-center border-r border-gray-300 lg:shrink-0">
-                      <Status status={task.status} />
-                    </div>
-                    <div className="p-5 max-w-[180px] w-full flex justify-center self-stretch items-center border-r border-gray-300 lg:shrink-0">
-                      {displayDate(task.created_at)}
-                    </div>
-                    <div className="p-5 flex justify-center self-stretch items-center grow lg:shrink-0 lg:max-w-[68px]">
-                      <Button
-                        className="flex items-center justify-center w-7 h-7 border border-gray-800 rounded text-gray-500 hover:text-red-600 hover:border-red-600 transition-colors"
-                        tag="button"
-                        type="button"
-                        onClick={() => dispatch(deleteTask(task.id as unknown as ITaskIdOnly))}
-                      >
-                        <SvgIcon name="bin" size="16" className="" />
-                      </Button>
-                    </div>
-                  </div>
-                </li>
-              ))
-            }
-          </ul>
-          : <Title className='text-xl font-semibold text-[#363853] mt-5' tag='h3'>
-            Задачи не найдены, имзените параметры фильтрации
-          </Title>
+  return status === 'error' ? (
+    <Title className="mt-5 text-xl font-semibold text-red-600" tag="h3">
+      Произошла ошибка
+    </Title>
+  ) : status === 'loading' ? (
+    <Title className="mt-5 text-xl font-semibold text-[#363853]" tag="h3">
+      Загрузка...
+    </Title>
+  ) : tasks.length ? (
+    <ul className="rounded-b-xl border-x border-b border-gray-300 bg-white lg:w-[768px]">
+      {tasks.map((task) => (
+        <li className="border-b border-gray-300 last:border-b-0" key={task.id}>
+          <div className="flex items-center">
+            <div className="flex w-full max-w-[120px] items-center justify-center self-stretch border-r border-gray-300 p-5 lg:shrink-0">
+              <CheckBoxField
+                name="completed"
+                value={task.completed}
+                onChange={() => handlerFinishTask(task)}
+              />
+            </div>
+            <div className="flex w-full max-w-[400px] items-center self-stretch border-r border-gray-300 p-5 font-robo lg:max-w-[230px] lg:shrink-0">
+              {task.name}
+            </div>
+            <div className="flex w-full max-w-[170px] items-center justify-center self-stretch border-r border-gray-300 p-5 lg:shrink-0">
+              <Status status={task.status} />
+            </div>
+            <div className="flex w-full max-w-[180px] items-center justify-center self-stretch border-r border-gray-300 p-5 lg:shrink-0">
+              {displayDate(task.created_at)}
+            </div>
+            <div className="flex grow items-center justify-center self-stretch p-5 lg:max-w-[68px] lg:shrink-0">
+              <Button
+                className="flex h-7 w-7 items-center justify-center rounded border border-gray-800 text-gray-500 transition-colors hover:border-red-600 hover:text-red-600"
+                tag="button"
+                type="button"
+                onClick={() => dispatch(deleteTask(task.id as unknown as ITaskIdOnly))}
+              >
+                <SvgIcon name="bin" size="16" className="" />
+              </Button>
+            </div>
+          </div>
+        </li>
+      ))}
+    </ul>
+  ) : (
+    <Title className="mt-5 text-xl font-semibold text-[#363853]" tag="h3">
+      Задачи не найдены, имзените параметры фильтрации
+    </Title>
   );
 };
 

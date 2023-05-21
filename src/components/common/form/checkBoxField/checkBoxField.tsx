@@ -14,17 +14,14 @@ const CheckBoxField: React.FC<CheckBoxFieldProps> = ({ name, value, children, on
     <>
       <div className="flex">
         <input
-          className="w-6 h-6 border border-solid border-[#f60b0b] rounded-[3px] shrink-0 cursor-pointer"
+          className="h-6 w-6 shrink-0 cursor-pointer rounded-[3px] border border-solid border-[#f60b0b]"
           type="checkbox"
           value={name}
           id={name}
           onChange={handleChange}
           checked={value}
         />
-        <label
-          className="text-[#505050] text-[18px] leading-[23px] cursor-pointer"
-          htmlFor={name}
-        >
+        <label className="cursor-pointer text-[18px] leading-[23px] text-[#505050]" htmlFor={name}>
           {children}
         </label>
       </div>
