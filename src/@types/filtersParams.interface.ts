@@ -1,4 +1,4 @@
 export interface IFiltersParams {
-  urlStatus?: string;
-  urlCompleted?: string;
+  taskStatus?: string;
+  taskCompleted?: string;
 }

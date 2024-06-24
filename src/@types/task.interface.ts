@@ -6,4 +6,9 @@ export interface ITask {
   created_at: string;
 }
 
+export interface ICompleteTask {
+  id: number;
+  completed: boolean;
+}
+
 export interface ITaskIdOnly extends Pick<ITask, 'id'> {}

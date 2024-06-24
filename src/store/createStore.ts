@@ -1,17 +1,18 @@
 import { combineReducers, configureStore } from '@reduxjs/toolkit';
 import { useDispatch } from 'react-redux';
 
-import tasksReducer from './tasks/reducer';
 import filtersReducer from './filters/reducer';
+import { taskAPI } from '../services/task.service';
 
 const rootReducer = combineReducers({
-  tasks: tasksReducer,
-  filters: filtersReducer
+  filters: filtersReducer,
+  [taskAPI.reducerPath]: taskAPI.reducer
 });
 
 export function createStore() {
   return configureStore({
-    reducer: rootReducer
+    reducer: rootReducer,
+    middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(taskAPI.middleware)
   });
 }
 

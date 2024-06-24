@@ -27,6 +27,13 @@
       "name": "Сохранение параметров фильтрации в URL",
       "status": "mid",
       "created_at": "1682606500790"
+    },
+    {
+      "completed": true,
+      "id": 575802,
+      "name": "Миграция с createAsyncThunk на RTK Query",
+      "status": "high",
+      "created_at": "1718813978486"
     }
   ]
 }

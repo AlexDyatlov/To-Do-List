@@ -8,8 +8,7 @@ import { ITask } from '../../../@types/task.interface';
 
 import { generateId } from '../../../utils/generateId';
 
-import { useAppDispatch } from '../../../store/createStore';
-import { createNewTask } from '../../../store/tasks/asyncActions';
+import { taskAPI } from '../../../services/task.service';
 
 const myObj: ITask = {
   id: generateId(),
@@ -21,14 +20,13 @@ const myObj: ITask = {
 
 const AddTaskForm: React.FC = () => {
   const [data, setData] = useState<ITask>(myObj);
+  const [createTask] = taskAPI.useCreateTaskMutation();
 
   const options = [
     { value: 'high', label: 'Высокий' },
     { value: 'mid', label: 'Средний' },
     { value: 'low', label: 'Низкий' }
   ];
-
-  const dispatch = useAppDispatch();
 
   const handleChange = (target: { name: string; value: string }) => {
     setData((prevState) => ({
@@ -49,7 +47,7 @@ const AddTaskForm: React.FC = () => {
     setData(myObj);
   };
 
-  const handlerAddTask = (e: React.FormEvent<HTMLFormElement>) => {
+  const handlerAddTask = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (!isValid) return;
 
@@ -59,7 +57,7 @@ const AddTaskForm: React.FC = () => {
       created_at: String(Date.now())
     };
 
-    dispatch(createNewTask(payload));
+    await createTask(payload);
     clearForm();
   };
 
