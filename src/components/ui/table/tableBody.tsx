@@ -31,20 +31,20 @@ const TableBody: React.FC = () => {
   const taskStatus = useSelector(getTaskStatus());
   const taskCompleted = useSelector(getTaskCompleted());
 
-  const getTasksFromUrlParams = () => {
-    const urlStatus = taskStatus ? `status=${taskStatus}` : '';
-    const urlCompleted = taskCompleted ? `&completed=${taskCompleted}` : '';
-
-    dispatch(
-      fetchTasks({
-        urlStatus,
-        urlCompleted
-      })
-    );
-  };
-
   // Если изменили параметры и был первый рендер
   useEffect(() => {
+    const getTasksFromUrlParams = () => {
+      const urlStatus = taskStatus ? `status=${taskStatus}` : '';
+      const urlCompleted = taskCompleted ? `&completed=${taskCompleted}` : '';
+
+      dispatch(
+        fetchTasks({
+          urlStatus,
+          urlCompleted
+        })
+      );
+    };
+
     if (isMounted.current) {
       const params = {
         taskStatus: taskStatus !== '' ? taskStatus : null,
@@ -58,11 +58,9 @@ const TableBody: React.FC = () => {
     if (!window.location.search) {
       getTasksFromUrlParams();
     }
-  }, [taskStatus, taskCompleted]);
 
-  useEffect(() => {
     getTasksFromUrlParams();
-  }, [taskStatus, taskCompleted]);
+  }, [taskStatus, taskCompleted, dispatch, navigate]);
 
   // Парсим параметры при первом рендере
   useEffect(() => {
@@ -71,7 +69,7 @@ const TableBody: React.FC = () => {
       dispatch(setFilters(params));
     }
     isMounted.current = true;
-  }, []);
+  }, [dispatch]);
 
   const handlerFinishTask = (task: ITask) => {
     setData((prevState) => ({
