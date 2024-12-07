@@ -5,6 +5,7 @@ import CustomSelect from '../../common/customSelect/customSelect';
 import TextField from '../../common/form/textField/textField';
 
 import { ITask } from '../../../@types/task.interface';
+import { TaskStatus } from '../../../@types/taskStatus';
 
 import { generateId } from '../../../utils/generateId';
 
@@ -40,7 +41,7 @@ const AddTaskForm: React.FC = () => {
   const handleChangeStatus = (value: string) => {
     setData((prevState) => ({
       ...prevState,
-      status: value
+      status: value as TaskStatus
     }));
   };
 
@@ -79,10 +80,7 @@ const AddTaskForm: React.FC = () => {
         onChange={handleChange}
       />
       <Button
-        className={
-          'rounded-md px-4 py-3 text-lg font-medium text-blue-600 md:w-full md:py-2' +
-          (!isValid ? ' cursor-not-allowed bg-[#f0f0f0] !text-[#9d9a9a]' : '')
-        }
+        className="rounded-md px-4 py-3 text-lg font-medium text-blue-600 md:w-full md:py-2"
         tag="button"
         type="submit"
         disabled={!isValid}

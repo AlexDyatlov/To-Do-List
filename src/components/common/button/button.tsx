@@ -1,6 +1,8 @@
+import clsx from 'clsx';
+
 type TitleTag = 'button' | 'a' | 'div';
 
-interface ButtonProps {
+export interface ButtonProps {
   className: string;
   children: string | React.ReactNode;
   tag: TitleTag;
@@ -9,13 +11,24 @@ interface ButtonProps {
   disabled?: boolean;
 }
 
-const initialStyles = 'transition-colors duration-300 ease-in-out';
-
-const Button: React.FC<ButtonProps> = ({ className, children, tag, onClick, ...rest }) => {
+const Button: React.FC<ButtonProps> = ({
+  className,
+  children,
+  tag,
+  disabled,
+  onClick,
+  ...rest
+}) => {
   const TagName = tag;
 
   return (
-    <TagName className={initialStyles + ' ' + className} onClick={onClick} {...rest}>
+    <TagName
+      className={clsx('transition-colors duration-300 ease-in-out', className, {
+        'cursor-not-allowed bg-[#f0f0f0] !text-[#9d9a9a]': disabled
+      })}
+      onClick={onClick}
+      {...rest}
+    >
       {children}
     </TagName>
   );

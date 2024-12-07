@@ -1,4 +1,5 @@
 import { useSelector } from 'react-redux';
+import clsx from 'clsx';
 
 import Button from '../../common/button/button';
 import Status from '../../common/status/status';
@@ -7,9 +8,10 @@ import Title from '../../common/title/title';
 import { useAppDispatch } from '../../../store/createStore';
 import { getTaskStatus } from '../../../store/filters/selectors';
 import { setTaskStatus } from '../../../store/filters/reducer';
+import { TaskStatus } from '../../../@types/taskStatus';
 
 const Sidebar: React.FC = () => {
-  const priorities: string[] = ['high', 'mid', 'low'];
+  const priorities: TaskStatus[] = ['high', 'mid', 'low'];
   const dispatch = useAppDispatch();
   const taskStatus = useSelector(getTaskStatus());
 
@@ -32,7 +34,9 @@ const Sidebar: React.FC = () => {
               onClick={() => onChangeStatus(item)}
             >
               <Status
-                className={'w-full ' + (taskStatus === item ? 'shadow-sm shadow-current ' : '')}
+                className={clsx('w-full', {
+                  'shadow-sm shadow-current': taskStatus === item
+                })}
                 status={item}
               />
             </Button>

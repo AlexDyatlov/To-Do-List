@@ -1,8 +1,10 @@
+import { TaskStatus } from './taskStatus';
+
 export interface ITask {
   id: number;
   completed: boolean;
   name: string;
-  status: string;
+  status: TaskStatus;
   created_at: string;
 }
 

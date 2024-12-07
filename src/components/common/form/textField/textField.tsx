@@ -21,9 +21,11 @@ const TextField: React.FC<TextFieldProps> = ({
 
   return (
     <div className="w-full">
-      <label className="block text-xl text-[#505050]" htmlFor={name}>
-        {label}
-      </label>
+      {label && (
+        <label className="block text-xl text-[#505050]" htmlFor={name}>
+          {label}
+        </label>
+      )}
       <div className="flex w-full flex-wrap items-stretch">
         <input
           id={name}

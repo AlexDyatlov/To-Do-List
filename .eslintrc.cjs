@@ -3,13 +3,9 @@ module.exports = {
     browser: true,
     es2021: true
   },
-  extends: [
-    'standard',
-    'plugin:react/recommended',
-    'plugin:@typescript-eslint/recommended',
-    'plugin:react-hooks/recommended'
-  ],
+  extends: ['standard', 'plugin:react/recommended', 'plugin:@typescript-eslint/recommended', 'plugin:react-hooks/recommended', 'plugin:storybook/recommended'],
   parser: '@typescript-eslint/parser',
+  ignorePatterns: ['!.storybook'],
   parserOptions: {
     ecmaFeatures: {
       jsx: true
